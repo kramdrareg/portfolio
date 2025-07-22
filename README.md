@@ -5,112 +5,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark Gerard S. Andrada - Technical Support Specialist</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .skill-bar { transition: width 1s ease-in-out; }
-        .animate-fade-in { animation: fadeIn 0.6s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .section-active { opacity: 1; transform: translateY(0); }
-        .section-hidden { opacity: 0; transform: translateY(30px); }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #1e40af 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .modern-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.3);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.05;
+            animation: floatShapes 25s infinite linear;
+        }
+        
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            top: 50%;
+            right: 15%;
+            animation-delay: 8s;
+        }
+        
+        .shape:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 16s;
+        }
+        
+        @keyframes floatShapes {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+        
+        .experience-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .experience-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="gradient-bg min-h-screen text-white">
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape w-40 h-40 bg-white rounded-full"></div>
+        <div class="shape w-32 h-32 bg-white rounded-lg rotate-45"></div>
+        <div class="shape w-48 h-48 bg-white rounded-full"></div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4">
+    <nav class="glass-card fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-xl font-bold text-gray-800">Mark Gerard Andrada</h1>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#home" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Home</a>
-                    <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">About</a>
-                    <a href="#experience" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Experience</a>
-                    <a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Skills</a>
-                    <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+                <h1 class="text-xl font-bold">Mark Gerard S. Andrada</h1>
+                <div class="hidden md:flex space-x-6 text-sm">
+                    <a href="#home" class="hover:text-blue-200 transition duration-300">Home</a>
+                    <a href="#about" class="hover:text-blue-200 transition duration-300">About</a>
+                    <a href="#experience" class="hover:text-blue-200 transition duration-300">Experience</a>
+                    <a href="#skills" class="hover:text-blue-200 transition duration-300">Skills</a>
+                    <a href="#contact" class="hover:text-blue-200 transition duration-300">Contact</a>
                 </div>
-                <button id="mobile-menu-btn" class="md:hidden text-gray-600">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
-                <a href="#home" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
-                <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About</a>
-                <a href="#experience" class="block py-2 text-gray-600 hover:text-blue-600">Experience</a>
-                <a href="#skills" class="block py-2 text-gray-600 hover:text-blue-600">Skills</a>
-                <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="gradient-bg min-h-screen flex items-center pt-16">
-        <div class="max-w-6xl mx-auto px-4 text-center text-white">
-            <div class="animate-fade-in">
-                <div class="w-32 h-32 bg-white/20 rounded-full mx-auto mb-6 flex items-center justify-center">
-                    <i class="fas fa-user text-4xl text-white"></i>
+    <section id="home" class="min-h-screen flex items-center justify-center relative z-10">
+        <div class="text-center px-6 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Mark Gerard S. Andrada</h1>
+            <p class="text-xl md:text-2xl mb-6 text-blue-100">Technical Support Specialist & Claims Examiner</p>
+            <p class="text-base md:text-lg mb-8 text-blue-50 leading-relaxed">
+                Over a decade of experience delivering exceptional customer service, resolving complex technical issues, and streamlining operational workflows
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a href="#about" class="glass-card px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300 font-semibold">
+                    Learn More
+                </a>
+                <a href="#contact" class="modern-card text-blue-600 px-6 py-3 rounded-lg hover:shadow-2xl transition duration-300 font-semibold">
+                    Get In Touch
+                </a>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-blue-100">
+                <div class="flex items-center gap-2">
+                    <span>📍</span>
+                    <span>Bay, Laguna, Philippines</span>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Mark Gerard S. Andrada</h1>
-                <p class="text-xl md:text-2xl mb-6 text-blue-100">Technical Support Specialist & Claims Examiner</p>
-                <p class="text-lg mb-8 max-w-2xl mx-auto text-blue-50">Over a decade of experience delivering exceptional customer service and resolving complex technical issues</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">Get In Touch</a>
-                    <a href="#experience" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">View Experience</a>
+                <div class="flex items-center gap-2">
+                    <span>📞</span>
+                    <span>+63 951 251 4379</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Professional Summary</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        Seasoned Technical Support Specialist and Claims Examiner with over a decade of experience delivering exceptional customer service, resolving complex technical issues, and streamlining operational workflows.
-                    </p>
-                    <p class="text-lg text-gray-600 leading-relaxed">
-                        Adept at troubleshooting security systems, mobile devices, and network configurations. Known for translating technical jargon into clear, actionable guidance and mentoring peers on best practices.
-                    </p>
-                    <div class="flex items-center space-x-4 text-gray-600">
-                        <i class="fas fa-map-marker-alt text-blue-600"></i>
-                        <span>Bay, Laguna, Philippines</span>
+    <section id="about" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="modern-card rounded-2xl p-8 md:p-12 text-gray-800">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Professional Summary</h2>
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-2">
+                        <p class="text-lg mb-6 leading-relaxed">
+                            Seasoned Technical Support Specialist and Claims Examiner with over a decade of experience delivering exceptional customer service, resolving complex technical issues, and streamlining operational workflows.
+                        </p>
+                        <p class="text-lg mb-6 leading-relaxed">
+                            Adept at troubleshooting security systems, mobile devices, and network configurations. Known for translating technical jargon into clear, actionable guidance and mentoring peers on best practices.
+                        </p>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 text-blue-800">Education</h3>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-gray-800">Computer System Technician</h4>
+                                <p class="text-gray-600">Computer Foundation of Calamba</p>
+                                <p class="text-sm text-gray-500">2001 – 2003</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-xl">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-6">Core Competencies</h3>
-                    <div class="grid grid-cols-1 gap-4">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-wrench text-blue-600"></i>
-                            <span class="text-gray-700">Technical Support & Troubleshooting</span>
+                    <div class="text-center">
+                        <div class="w-48 h-48 mx-auto bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-4xl font-bold text-white shadow-2xl mb-4">
+                            MGA
                         </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-clipboard-list text-blue-600"></i>
-                            <span class="text-gray-700">Claims Analysis & Verification</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-folder text-blue-600"></i>
-                            <span class="text-gray-700">Back Office Operations</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-brain text-blue-600"></i>
-                            <span class="text-gray-700">Subject Matter Expertise</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-network-wired text-blue-600"></i>
-                            <span class="text-gray-700">Network Configuration & Remote Access</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-mobile-alt text-blue-600"></i>
-                            <span class="text-gray-700">Mobile App & Device Integration</span>
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <p class="flex items-center justify-center gap-2">
+                                <span>📧</span>
+                                <span>markgerard.andrada@gmail.com</span>
+                            </p>
+                            <p class="flex items-center justify-center gap-2">
+                                <span>📍</span>
+                                <span>Bay, Laguna 4033</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -119,131 +201,78 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Professional Experience</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div class="space-y-8">
-                <!-- Experience Item 1 -->
-                <div class="bg-white rounded-xl p-8 card-hover">
+    <section id="experience" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Professional Experience</h2>
+            <div class="space-y-6">
+                <div class="modern-card experience-card rounded-2xl p-8 text-gray-800">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Technical VA</h3>
-                            <p class="text-blue-600 font-medium">Swann Communications LTD</p>
-                        </div>
-                        <span class="text-gray-500 mt-2 md:mt-0">April 2025 – Present</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-blue-600">Technical VA</h3>
+                        <span class="text-gray-500 font-medium">April 2025 – Present</span>
                     </div>
-                    <ul class="text-gray-600 space-y-2">
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Provided expert phone support for CCTV systems (DVR/NVR, wired/wireless cameras)</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Assisted with installation, setup, and remote access configuration</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Resolved issues like offline cameras, no video, recording failures, and playback errors</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Supported mobile app setup, notifications, and device pairing</span>
-                        </li>
+                    <p class="text-blue-500 font-semibold mb-4">Swann Communications LTD</p>
+                    <ul class="text-gray-700 leading-relaxed space-y-2">
+                        <li>• Provided expert phone support for CCTV systems (DVR/NVR, wired/wireless cameras)</li>
+                        <li>• Assisted with installation, setup, and remote access configuration</li>
+                        <li>• Resolved issues like offline cameras, no video, recording failures, and playback errors</li>
+                        <li>• Supported mobile app setup, notifications, and device pairing</li>
+                        <li>• Handled network concerns including Wi-Fi, IP setup, and port forwarding</li>
                     </ul>
                 </div>
 
-                <!-- Experience Item 2 -->
-                <div class="bg-white rounded-xl p-8 card-hover">
+                <div class="modern-card experience-card rounded-2xl p-8 text-gray-800">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Technical Support Expert</h3>
-                            <p class="text-blue-600 font-medium">Asurion</p>
-                        </div>
-                        <span class="text-gray-500 mt-2 md:mt-0">April 2023 – August 2024</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-blue-600">Technical Support Expert</h3>
+                        <span class="text-gray-500 font-medium">April 2023 – August 2024</span>
                     </div>
-                    <ul class="text-gray-600 space-y-2">
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Delivered real-time support for mobile devices and electronics</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Simplified complex technical details for customer understanding</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Resolved device functionality, connectivity, and software issues</span>
-                        </li>
+                    <p class="text-blue-500 font-semibold mb-4">Asurion</p>
+                    <ul class="text-gray-700 leading-relaxed space-y-2">
+                        <li>• Delivered real-time support for mobile devices and electronics</li>
+                        <li>• Simplified complex technical details for customer understanding</li>
+                        <li>• Resolved device functionality, connectivity, and software issues</li>
+                        <li>• Promoted protection plans and documented cases in CRM</li>
+                        <li>• Collaborated on process improvements based on recurring issues</li>
                     </ul>
                 </div>
 
-                <!-- Experience Item 3 -->
-                <div class="bg-white rounded-xl p-8 card-hover">
+                <div class="modern-card experience-card rounded-2xl p-8 text-gray-800">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Claims Review Examiner</h3>
-                            <p class="text-blue-600 font-medium">Asurion</p>
-                        </div>
-                        <span class="text-gray-500 mt-2 md:mt-0">August 2017 – March 2023</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-blue-600">Claims Review Examiner</h3>
+                        <span class="text-gray-500 font-medium">August 2017 – March 2023</span>
                     </div>
-                    <ul class="text-gray-600 space-y-2">
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Reviewed insurance claims for accuracy and compliance</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Investigated documentation and device history for legitimacy</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Coordinated with legal and fraud teams on disputed claims</span>
-                        </li>
+                    <p class="text-blue-500 font-semibold mb-4">Asurion</p>
+                    <ul class="text-gray-700 leading-relaxed space-y-2">
+                        <li>• Reviewed insurance claims for accuracy and compliance</li>
+                        <li>• Investigated documentation and device history for legitimacy</li>
+                        <li>• Coordinated with legal and fraud teams on disputed claims</li>
+                        <li>• Maintained detailed records and ensured regulatory compliance</li>
                     </ul>
                 </div>
 
-                <!-- Experience Item 4 -->
-                <div class="bg-white rounded-xl p-8 card-hover">
+                <div class="modern-card experience-card rounded-2xl p-8 text-gray-800">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Technical Support Representative (Back Office)</h3>
-                            <p class="text-blue-600 font-medium">West Contact Services</p>
-                        </div>
-                        <span class="text-gray-500 mt-2 md:mt-0">February 2015 – May 2017</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-blue-600">Technical Support Representative</h3>
+                        <span class="text-gray-500 font-medium">February 2015 – May 2017</span>
                     </div>
-                    <ul class="text-gray-600 space-y-2">
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Executed high-volume data entry and system updates</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Ensured accuracy across customer records and service requests</span>
-                        </li>
+                    <p class="text-blue-500 font-semibold mb-4">West Contact Services (Back Office)</p>
+                    <ul class="text-gray-700 leading-relaxed space-y-2">
+                        <li>• Executed high-volume data entry and system updates</li>
+                        <li>• Ensured accuracy across customer records and service requests</li>
+                        <li>• Supported front-line teams with validation and documentation</li>
                     </ul>
                 </div>
 
-                <!-- Experience Item 5 -->
-                <div class="bg-white rounded-xl p-8 card-hover">
+                <div class="modern-card experience-card rounded-2xl p-8 text-gray-800">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Technical Support Representative</h3>
-                            <p class="text-blue-600 font-medium">STARTEK</p>
-                        </div>
-                        <span class="text-gray-500 mt-2 md:mt-0">January 2013 – May 2014</span>
+                        <h3 class="text-xl md:text-2xl font-bold text-blue-600">Technical Support Representative</h3>
+                        <span class="text-gray-500 font-medium">January 2013 – May 2014</span>
                     </div>
-                    <ul class="text-gray-600 space-y-2">
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Delivered phone-based support for hardware and software issues</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fas fa-check-circle text-blue-600 mt-1 text-sm"></i>
-                            <span>Logged complaints and tracked resolutions via ticketing systems</span>
-                        </li>
+                    <p class="text-blue-500 font-semibold mb-4">STARTEK</p>
+                    <ul class="text-gray-700 leading-relaxed space-y-2">
+                        <li>• Delivered phone-based support for hardware and software issues</li>
+                        <li>• Logged complaints and tracked resolutions via ticketing systems</li>
+                        <li>• Escalated complex cases and contributed to improved workflows</li>
+                        <li>• Demonstrated empathy and professionalism in customer interactions</li>
                     </ul>
                 </div>
             </div>
@@ -251,56 +280,52 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Technical Skills</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- CRM & Support Platforms -->
-                <div class="bg-gray-50 p-6 rounded-xl">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-desktop text-blue-600 mr-3"></i>
-                        CRM & Support Platforms
-                    </h3>
-                    <div class="space-y-2 text-gray-600">
-                        <div>Outlook</div>
-                        <div>Horizon</div>
-                        <div>ACSS</div>
-                        <div>EINSTEIN</div>
-                        <div>Citrix</div>
-                        <div>Zendesk</div>
-                        <div>ClickUp</div>
-                    </div>
-                </div>
+    <section id="skills" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Core Competencies & Technical Tools</h2>
+            <div class="modern-card rounded-2xl p-8 md:p-12">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Core Competencies</h3>
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">🔧 Technical Support & Troubleshooting</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">📋 Claims Analysis & Verification</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">🗂️ Back Office Operations</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">🧠 Subject Matter Expertise</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">🌐 Network Configuration</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">📱 Mobile App Integration</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">🧾 CRM & Ticketing Systems</span>
+                        </div>
 
-                <!-- Product Knowledge -->
-                <div class="bg-gray-50 p-6 rounded-xl">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-video text-blue-600 mr-3"></i>
-                        Product Knowledge
-                    </h3>
-                    <div class="space-y-2 text-gray-600">
-                        <div>Swann</div>
-                        <div>Raysharp</div>
-                        <div>HIK Vision</div>
-                        <div>V8</div>
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">CRM & Support Platforms</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Outlook</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Horizon</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">ACSS</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">EINSTEIN</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Citrix</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Zendesk</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">ClickUp</span>
+                        </div>
                     </div>
-                </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Product Knowledge</h3>
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Swann</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Raysharp</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">HIK Vision</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">V8</span>
+                        </div>
 
-                <!-- Software & Systems -->
-                <div class="bg-gray-50 p-6 rounded-xl">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-cogs text-blue-600 mr-3"></i>
-                        Software & Systems
-                    </h3>
-                    <div class="space-y-2 text-gray-600">
-                        <div>Android</div>
-                        <div>iOS</div>
-                        <div>Windows</div>
-                        <div>macOS</div>
-                        <div>Google Workspace</div>
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Software & Systems</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Android</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">iOS</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Windows</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">macOS</span>
+                            <span class="skill-tag px-4 py-2 rounded-full text-sm font-medium">Google Workspace</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -308,77 +333,78 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 gradient-bg">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Get In Touch</h2>
-                <div class="w-20 h-1 bg-white mx-auto"></div>
-                <p class="text-blue-100 mt-6 max-w-2xl mx-auto">Ready to bring technical expertise and exceptional customer service to your team</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="space-y-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-white/20 p-3 rounded-lg">
-                            <i class="fas fa-map-marker-alt text-white text-xl"></i>
-                        </div>
+    <section id="contact" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="modern-card rounded-2xl p-8 md:p-12 text-gray-800">
+                    <div class="grid md:grid-cols-2 gap-12">
                         <div>
-                            <h3 class="text-white font-semibold mb-2">Address</h3>
-                            <p class="text-blue-100">Block 2 Lot 17 Talc Street, Cambria Subdivision<br>Santo Domingo, Bay, Laguna 4033</p>
+                            <h3 class="text-2xl font-bold mb-6 text-blue-600">Contact Information</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <span class="text-blue-600 text-xl">📧</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Email</p>
+                                        <p class="text-gray-600">markgerard.andrada@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <span class="text-blue-600 text-xl">📱</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Phone</p>
+                                        <p class="text-gray-600">+63 951 251 4379</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <span class="text-blue-600 text-xl">📍</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Address</p>
+                                        <p class="text-gray-600">Block 2 Lot 17 Talc Street<br>Cambria Subdivision<br>Santo Domingo, Bay, Laguna 4033</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6 text-blue-600">Let's Connect</h3>
+                            <p class="text-gray-700 mb-8 leading-relaxed">
+                                I'm always interested in new opportunities and exciting projects in technical support, customer service, and claims examination. Whether you have a question about my experience or want to discuss potential collaboration, feel free to reach out!
+                            </p>
+                            <div class="bg-blue-50 p-6 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-3">Areas of Expertise:</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• CCTV & Security Systems Support</li>
+                                    <li>• Mobile Device Troubleshooting</li>
+                                    <li>• Insurance Claims Processing</li>
+                                    <li>• Network Configuration</li>
+                                    <li>• Customer Service Excellence</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-white/20 p-3 rounded-lg">
-                            <i class="fas fa-phone text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Phone</h3>
-                            <a href="tel:+639512514379" class="text-blue-100 hover:text-white transition-colors">+63 951 251 4379</a>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-white/20 p-3 rounded-lg">
-                            <i class="fas fa-envelope text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-white font-semibold mb-2">Email</h3>
-                            <a href="mailto:markgerard.andrada@gmail.com" class="text-blue-100 hover:text-white transition-colors">markgerard.andrada@gmail.com</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-xl">
-                    <h3 class="text-white text-xl font-semibold mb-6">Send a Message</h3>
-                    <form class="space-y-4" onsubmit="handleFormSubmit(event)">
-                        <div>
-                            <input type="text" placeholder="Your Name" required class="w-full p-3 rounded-lg bg-white/20 text-white placeholder-blue-200 border border-white/30 focus:border-white focus:outline-none">
-                        </div>
-                        <div>
-                            <input type="email" placeholder="Your Email" required class="w-full p-3 rounded-lg bg-white/20 text-white placeholder-blue-200 border border-white/30 focus:border-white focus:outline-none">
-                        </div>
-                        <div>
-                            <textarea placeholder="Your Message" rows="4" required class="w-full p-3 rounded-lg bg-white/20 text-white placeholder-blue-200 border border-white/30 focus:border-white focus:outline-none resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">Send Message</button>
-                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <p>&copy; 2024 Mark Gerard S. Andrada. All rights reserved.</p>
-            <p class="text-gray-400 mt-2">Technical Support Specialist | Claims Examiner | Customer Service Expert</p>
+    <footer class="py-12 text-center relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="glass-card rounded-2xl p-8">
+                <p class="text-blue-100 mb-4">&copy; 2024 Mark Gerard S. Andrada. All rights reserved.</p>
+                <p class="text-blue-200 text-sm">Technical Support Specialist | Claims Examiner | Customer Service Expert</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -389,65 +415,41 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    // Close mobile menu if open
-                    document.getElementById('mobile-menu').classList.add('hidden');
                 }
             });
         });
 
-        // Form submission handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            
-            // Show success message
-            alert('Thank you for your message! This is a demo form. In a real implementation, this would send your message to Mark Gerard.');
-            
-            // Reset form
-            form.reset();
-        }
-
-        // Scroll animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.card-hover, .animate-fade-in');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('section-active');
-                    element.classList.remove('section-hidden');
-                }
-            });
-        }
-
-        // Initialize scroll animations
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll(); // Run on page load
-
-        // Active navigation highlighting
+        // Add scroll effect to navigation
         window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (pageYOffset >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.2)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
 
-            navLinks.forEach(link => {
-                link.classList.remove('text-blue-600');
-                link.classList.add('text-gray-600');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.remove('text-gray-600');
-                    link.classList.add('text-blue-600');
+        // Add animation to experience cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
+        }, observerOptions);
+
+        document.querySelectorAll('.experience-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9634438fa419bc4c',t:'MTc1MzIwMTIxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9634b36d606fb9f5',t:'MTc1MzIwNTc5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
